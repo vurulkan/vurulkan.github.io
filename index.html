@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mustafa Volkan VURULKAN - CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05060a;
+      --panel: #0c0f17;
+      --accent: #4ef29a;
+      --accent-soft: rgba(78, 242, 154, 0.14);
+      --muted: #9fb2c8;
+      --text: #d6e2f3;
+      --danger: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 20%, rgba(78,242,154,0.07), transparent 25%),
+                  radial-gradient(circle at 80% 10%, rgba(255,107,107,0.08), transparent 22%),
+                  linear-gradient(135deg, #05060a 0%, #050812 45%, #06101a 100%);
+      color: var(--text);
+      font-family: "Space Grotesk", "Fira Code", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 32px;
+      overflow-x: hidden;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(circle at center, transparent, transparent 40%, rgba(0,0,0,0.7));
+      pointer-events: none;
+      z-index: 0;
+    }
+    .noise {
+      position: fixed;
+      inset: -50px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(12,15,23,0.96), rgba(8,10,17,0.92));
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(78,242,154,0.14);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+    .shell__titlebar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.05));
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-family: "Fira Code", monospace;
+      color: var(--muted);
+    }
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(78,242,154,0.8);
+    }
+    .dot:nth-child(2) { background: #f6d55c; box-shadow: 0 0 12px rgba(246,213,92,0.7); }
+    .dot:nth-child(3) { background: #ff6b6b; box-shadow: 0 0 12px rgba(255,107,107,0.7); }
+    .shell__body {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+    @media (max-width: 960px) {
+      .shell__body { grid-template-columns: 1fr; }
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 3vw, 38px);
+      letter-spacing: -0.5px;
+      color: var(--accent);
+      text-shadow: 0 0 16px rgba(78,242,154,0.4);
+    }
+    .subtitle {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(78,242,154,0.07);
+      border: 1px solid rgba(78,242,154,0.2);
+      border-radius: 10px;
+      font-family: "Fira Code", monospace;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .cursor {
+      width: 10px;
+      height: 18px;
+      background: var(--accent);
+      animation: blink 1s steps(2) infinite;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+    .prompt {
+      font-family: "Fira Code", monospace;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+    .prompt::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(78,242,154,0.07) 45%, transparent 55%);
+      transform: translateX(-60%);
+      animation: sweep 6s ease-in-out infinite;
+    }
+    @keyframes sweep {
+      0%, 25% { transform: translateX(-70%); }
+      50% { transform: translateX(80%); }
+      100% { transform: translateX(80%); }
+    }
+    .prompt__line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .prompt__prefix { color: var(--muted); }
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
+      animation: caret 1s step-end infinite;
+      max-width: 100%;
+    }
+    @keyframes caret {
+      0%, 50% { border-color: var(--accent); }
+      50.01%, 100% { border-color: transparent; }
+    }
+    section {
+      margin-top: 22px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    section h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+      color: var(--text);
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-family: "Fira Code", monospace;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .chip {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 9px;
+      border: 1px solid rgba(78,242,154,0.3);
+      color: var(--accent);
+      background: rgba(78,242,154,0.06);
+      font-size: 12px;
+      margin: 0 6px 6px 0;
+      font-family: "Fira Code", monospace;
+    }
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      padding: 14px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .timeline .card {
+      overflow: visible;
+      padding-left: 18px;
+    }
+    .experience-card { cursor: pointer; }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(78,242,154,0.08), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover::after { opacity: 1; }
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+    .muted { color: var(--muted); font-size: 13px; }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 12px;
+      margin-right: 8px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.03);
+    }
+    .timeline {
+      position: relative;
+      padding-left: 22px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(78,242,154,0.9), rgba(78,242,154,0.1));
+    }
+    .bullet {
+      position: absolute;
+      left: -2px;
+      top: 3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(78,242,154,0.7);
+    }
+    .footer {
+      padding: 18px 24px 24px;
+      font-family: "Fira Code", monospace;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: rgba(78,242,154,0.07);
+      color: var(--accent);
+      border: 1px solid rgba(78,242,154,0.3);
+      border-radius: 8px;
+      padding: 6px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge span { font-size: 11px; }
+    .command-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .cmd {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-family: "Fira Code", monospace;
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .cmd:hover {
+      transform: translateY(-2px);
+      border-color: rgba(78,242,154,0.4);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(12,15,23,0.9);
+      border: 1px solid rgba(78,242,154,0.35);
+      color: var(--text);
+      font-family: "Fira Code", monospace;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 15;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    .modal__panel {
+      width: min(720px, 100%);
+      background: linear-gradient(150deg, rgba(12,15,23,0.97), rgba(8,10,17,0.9));
+      border: 1px solid rgba(78,242,154,0.25);
+      border-radius: 16px;
+      box-shadow: 0 30px 120px rgba(0,0,0,0.55);
+      overflow: hidden;
+      position: relative;
+      transform: scale(0.94) translateY(8px);
+      opacity: 0;
+      transition: transform 0.80s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+    }
+    .modal.show .modal__panel {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    .modal__header {
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-family: "Fira Code", monospace;
+      color: var(--muted);
+    }
+    .modal__body {
+      padding: 18px;
+      line-height: 1.6;
+      color: var(--text);
+      max-height: min(70vh, 640px);
+      overflow: auto;
+    }
+    .modal__body h3 { margin: 0 0 6px; }
+    .modal__body .muted { margin-bottom: 12px; display: block; }
+    .modal__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .modal__list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-family: "Fira Code", monospace;
+      color: var(--text);
+    }
+    .modal__list .caret {
+      color: var(--accent);
+    }
+    .modal__close {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: "Fira Code", monospace;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .modal__close:hover {
+      border-color: rgba(78,242,154,0.5);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="noise"></div>
+  <div class="shell">
+    <div class="shell__titlebar">
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <span>~/cv/terminal.sh</span>
+    </div>
+    <div class="shell__body">
+      <div>
+        <h1>Mustafa Volkan VURULKAN - DevOps & Linux</h1>
+        <p class="subtitle">Seasoned IT professional ensuring seamless operations of business-critical systems. Passion for Linux since 2007 (Pardus) and deeply focused on modern DevOps, cloud-native architectures, and reliable automation.</p>
+        <div class="tagline">
+          <span>$ whoami</span>
+          <div class="cursor"></div>
+        </div>
+        <div class="prompt">
+          <div class="prompt__line">
+            <span class="prompt__prefix">mvurulkan@ops:~$</span>
+            <span class="typewriter" id="typewriter"></span>
+          </div>
+        </div>
+        <section>
+          <h2>about.ini</h2>
+          <div id="about"></div>
+          <div class="command-bar" id="quickCommands"></div>
+        </section>
+        <section>
+          <h2>skills.txt</h2>
+          <div id="skills"></div>
+        </section>
+      </div>
+      <div>
+        <section>
+          <h2>ls /var/links</h2>
+          <div class="command-bar" id="contactLinks"></div>
+        </section>
+        <section>
+          <h2>experience.log <span class="hint">(click for details)</span></h2>
+          <div class="timeline">
+            <ul class="list" id="experience"></ul>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="badge">● Online - last commit <span id="commitTime">now</span></div>
+      <div class="badge">▲ kubectl get nodes</div>
+      <div class="badge">▲ ansible-playbook site.yml</div>
+      <div class="badge">▲ ssh secure-by-default</div>
+    </div>
+  </div>
+  <div class="toast" id="toast">Command copied</div>
+  <div class="modal" id="modal">
+    <div class="modal__panel">
+      <div class="modal__header">
+        <span id="modalTitle">experience</span>
+        <button class="modal__close" id="modalClose">exit</button>
+      </div>
+      <div class="modal__body">
+        <h3 id="modalRole"></h3>
+        <span class="muted" id="modalPeriod"></span>
+        <p class="muted" id="modalSummary"></p>
+        <div id="modalTags"></div>
+        <ul class="modal__list" id="modalDetail"></ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    const aboutLines = [
+      "Seasoned IT professional with a proven record of keeping business-critical systems seamless and resilient.",
+      "Linux passion since 2007 (Pardus); deep experience across Linux/UNIX/Windows with continuous upskilling.",
+      "DevOps focus: CI/CD design, scalable container platforms, cloud-native architectures with Kubernetes, Jenkins, Ansible, Azure DevOps.",
+      "Thrives on complex troubleshooting and high availability; detail-driven, strategic, and committed to continuous improvement.",
+      "Dedicated to empowering teams with innovative IT strategies that deliver efficiency, reliability, and growth."
+    ];
+
+
+    const skills = [
+      "Linux", "Kubernetes", "Docker", "Helm", "Terraform", "Ansible",
+      "GitLab CI/CD", "Prometheus/Grafana", "ELK/EFK", "NGINX", "HAProxy",
+      "PostgreSQL/MySQL", "Redis", "Vault", "Networking", "Firewalls",
+      "VMware/KVM", "Bash", "Python", "Go (basics)", "Monitoring/SLO"
+    ];
+
+    const experiences = [
+      {
+        role: "Senior DevOps Developer",
+        company: "ATP",
+        period: "Dec 2024 - Present",
+        summary: "Azure DevOps & Jenkins CI/CD ownership; Kubernetes/OpenShift/Rancher/KubeSphere orchestration, Helm packaging, Redis/RabbitMQ/Kafka integrations, AKS design, Grafana/Zabbix observability, ELK logging, Cloudflare WAF/LB, Bash automation.",
+        stack: ["Azure DevOps", "Jenkins", "Kubernetes", "OpenShift", "Helm", "Kafka/RabbitMQ", "Grafana/Zabbix", "Cloudflare WAF"],
+        detail: [
+          "Management of Azure DevOps & Jenkins and write pipelines for continuous integration and continuous deployment (CI/CD) processes.",
+          "Container orchestration and management using Kubernetes, OpenShift, Rancher, and KubeSphere platforms. (OnPrem & Cloud)",
+          "Management and packaging of Kubernetes applications with Helm.",
+          "Docker container management, installation, and application deployment.",
+          "Design and management of cloud-based Kubernetes clusters on Azure AKS.",
+          "Integration of messaging and caching technologies like Redis, RabbitMQ and Kafka, etc.",
+          "Ansible for infrastructure automation and configuration management.",
+          "Installation, configuration, and performance optimization for various open-source databases (MySQL, PostgreSQL, MongoDB, etc.).",
+          "System monitoring, performance analysis, and alert management using Grafana and Zabbix.",
+          "Log management, analysis, and visualization with Elasticsearch and Kibana.",
+          "Developing proactive solutions for performance monitoring, security enhancements, and high availability.",
+          "Cloudflare WAF & LB Management.",
+          "Bash scripting for automation processes."
+        ]
+      },
+      {
+        role: "Senior Linux System Administrator",
+        company: "ATP",
+        period: "May 2022 - Present",
+        summary: "End-to-end Linux ownership: high availability, virtualization, security hardening, and resilient network services.",
+        stack: ["Linux", "HA", "Virtualization", "Security Hardening", "Networking"],
+        detail: [
+          "Operate and harden Linux estates; design HA for core services and critical network components.",
+          "Own virtualization platforms (VMware/KVM) and backup strategies for resilience.",
+          "Implement security baselines, auditing, and incident response runbooks."
+        ]
+      },
+      {
+        role: "DevOps Specialist",
+        company: "ATP",
+        period: "Oct 2023 - Dec 2024",
+        summary: "Built CI/CD pipelines, automation and containerized deliveries; configuration management and observability stacks.",
+        stack: ["CI/CD", "Ansible", "Containers", "Monitoring", "Automation"],
+        detail: [
+          "Delivered CI/CD pipelines and infrastructure automation with Ansible and containers.",
+          "Set up monitoring/alerting stacks to improve deployment confidence and MTTR.",
+          "Standardized delivery templates and release processes across teams."
+        ]
+      },
+      {
+        role: "IT Project Manager",
+        company: "Netserve",
+        period: "Sep 2020 - May 2022",
+        summary: "Designed, deployed and operated complex on-prem/cloud infrastructures with full-stack automation, high-availability architectures, security controls and enterprise-grade observability.",
+        stack: ["Infrastructure Design", "Automation", "Linux", "Observability", "Disaster Recovery", "ELK", "Migration (P2V/V2V)", "Virtualization"],
+        detail: [
+          "Provide the continuity of the IT infrastructures of customers with existing maintenance contracts. Installation & Configuration & Management and Monitoring.",
+          "Coordinating and training the technical team.",
+          "Design and manage projects for existing and external customers.",
+          "To lead the team that will realize the project.",
+          "Providing cloud services to customers by creating SaaS & PaaS infrastructure in Datacenter.",
+          "Netscaler Management",
+          "Nextcloud Installation & Configuration & Management",
+          "ELK Installation & Configuration & Management",
+          "Grafana Installation & Configuration & Management",
+          "Galera Cluster (Multi-Master) Installation & Configuration & Management",
+          "HAProxy Installation & Configuration & Management",
+          "Ansible & AWX Installation & Configuration & Management",
+          "MinIO S3 Storage Server Installation & Configuration & Mgmt.",
+          "NGINX / Apache Webserver Installation & Configuration & Mgmt.",
+          "Reverse Proxy Installation & Configuration & Management",
+          "Linux Server Installation & Configuration & Management",
+          "MSSQL & MySQL Server Installation & Configuration & Mgmt.",
+          "Fortigate Firewall Installation & Configuration & Management",
+          "Zimbra Installation & Configuration & Management",
+          "Microsoft Exchange Server Installation & Configuration & Mgmt.",
+          "Veeam Backup Installation & Configuration & Management",
+          "Design & Implementation of Disaster Recovery Scenarios",
+          "Design & Implementation of P2V, V2V Migration Scenarios",
+          "VMWare Cluster Installation & Configuration & Management",
+          "Installation & Configuration & Management of Open Source Software (PfSense, Seed DMS, Snipe-IT, Ajenti-V, OsTicket, FreeNAS, Xen, Zammad, Nextcloud, MinIO, WebRTC, Turn,Stun, Zimbra, NGINX, OSSEC, ELK, Grafana, Wazuh, Snort, BigBlueButton /w Greenlight)"
+        ]
+      }
+    ];
+
+    const rotatingLines = [
+
+      "tail -f /var/log/career.log",
+      "kubectl get pods --all-namespaces",
+      "ansible-playbook deploy.yml --check",
+      "watch -n1 'uptime && df -h'",
+      "cat mission.txt | lolcat"
+    ];
+
+    const quickCommands = [
+      "ssh mvurulkan@reliable.host",
+      "kubectl top nodes",
+      "terraform plan -out=tf.plan",
+      "ansible -m ping all",
+      "sudo systemctl status everything"
+    ];
+
+    const links = [
+      { label: "Email", href: "mailto:mustafa@vurulkan.com" },
+      { label: "LinkedIn", href: "https://linkedin.com/in/vurulkan" },
+      { label: "GitHub", href: "https://github.com/vurulkan/" },
+      { label: "Medium", href: "https://vurulkan.medium.com/" },
+      { label: "Blog", href: "https://vurulkan.com/blog/" }
+    ];
+
+    const typewriterEl = document.getElementById("typewriter");
+    let lineIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      const line = rotatingLines[lineIndex];
+      typewriterEl.textContent = deleting ? line.slice(0, charIndex) : line.slice(0, charIndex + 1);
+      charIndex = deleting ? charIndex - 1 : charIndex + 1;
+
+      if (!deleting && charIndex === line.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1100);
+        return;
+      }
+      if (deleting && charIndex < 0) {
+        deleting = false;
+        lineIndex = (lineIndex + 1) % rotatingLines.length;
+        charIndex = 0;
+      }
+      const speed = deleting ? 45 : 85;
+      setTimeout(typeLoop, speed);
+    }
+    typeLoop();
+
+    function renderList() {
+      const aboutTarget = document.getElementById("about");
+      aboutTarget.innerHTML = aboutLines.map(line => `<div class="card"><div class="prompt__line"><span class="prompt__prefix">></span><span>${line}</span></div></div>`).join("");
+
+      const skillsTarget = document.getElementById("skills");
+      skillsTarget.innerHTML = skills.map(skill => `<span class="chip">${skill}</span>`).join("");
+
+      const experienceTarget = document.getElementById("experience");
+      experienceTarget.innerHTML = experiences.map((exp, idx) => `
+        <li class="card experience-card" data-exp="${idx}">
+          <div class="bullet"></div>
+          <h3>${exp.role} - ${exp.company}</h3>
+          <div class="muted">${exp.period}</div>
+          <p class="muted">${exp.summary}</p>
+          <div>${exp.stack.map(tag => `<span class="pill">${tag}</span>`).join("")}</div>
+        </li>
+      `).join("");
+
+      const quickTarget = document.getElementById("quickCommands");
+      quickTarget.innerHTML = quickCommands.map(cmd => `<button class="cmd" data-cmd="${cmd}">${cmd}</button>`).join("");
+
+      const linksTarget = document.getElementById("contactLinks");
+      linksTarget.innerHTML = links.map(link => `<a class="cmd" href="${link.href}" target="_blank" rel="noreferrer noopener">${link.label}</a>`).join("");
+    }
+    renderList();
+
+    const modal = document.getElementById("modal");
+    const modalClose = document.getElementById("modalClose");
+    const modalRole = document.getElementById("modalRole");
+    const modalPeriod = document.getElementById("modalPeriod");
+    const modalSummary = document.getElementById("modalSummary");
+    const modalDetail = document.getElementById("modalDetail");
+    const modalTags = document.getElementById("modalTags");
+    const modalTitle = document.getElementById("modalTitle");
+
+    function openModal(exp) {
+      modalRole.textContent = `${exp.role} - ${exp.company}`;
+      modalPeriod.textContent = exp.period;
+      modalSummary.textContent = exp.summary;
+      modalTags.innerHTML = exp.stack.map(tag => `<span class="pill">${tag}</span>`).join("");
+      modalDetail.innerHTML = (exp.detail || []).map(item => `<li><span class="caret">$</span><span>${item}</span></li>`).join("");
+      modalTitle.textContent = "~/experience/details";
+      modal.classList.add("show");
+    }
+
+    function closeModal() {
+      modal.classList.remove("show");
+    }
+
+    document.getElementById("experience").addEventListener("click", (e) => {
+      const card = e.target.closest(".experience-card");
+      if (!card) return;
+      const idx = Number(card.dataset.exp);
+      const exp = experiences[idx];
+      if (exp) openModal(exp);
+    });
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("show")) closeModal();
+    });
+
+    const toast = document.getElementById("toast");
+    document.getElementById("quickCommands").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-cmd]");
+      if (!btn) return;
+      navigator.clipboard.writeText(btn.dataset.cmd).then(() => {
+        toast.textContent = `> ${btn.dataset.cmd} copied`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1400);
+      });
+    });
+
+    const commitEl = document.getElementById("commitTime");
+    const now = new Date();
+    commitEl.textContent = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")} UTC+3`;
+  </script>
+</body>
+</html>
