@@ -419,6 +419,106 @@
       border-color: rgba(78,242,154,0.5);
       transform: translateY(-1px);
     }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+      .shell {
+        border-radius: 14px;
+      }
+      .shell__body {
+        padding: 20px 18px 22px;
+        gap: 20px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .subtitle {
+        font-size: 14px;
+      }
+      section {
+        padding: 12px;
+      }
+      section h2 {
+        font-size: 16px;
+      }
+      .prompt {
+        padding: 12px;
+      }
+      .card {
+        padding: 12px;
+      }
+      .chip {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+      .pill {
+        padding: 3px 8px;
+        font-size: 11px;
+      }
+      .footer {
+        padding: 14px 14px 18px;
+        gap: 8px;
+      }
+      .badge {
+        padding: 5px 8px;
+      }
+      .modal__panel {
+        width: 100%;
+      }
+      .modal__body {
+        padding: 16px;
+      }
+      .command-bar {
+        gap: 6px;
+      }
+      .cmd {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      .shell__body {
+        padding: 16px 12px 18px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      .tagline {
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+      .prompt__prefix {
+        font-size: 11px;
+      }
+      .typewriter {
+        font-size: 11px;
+      }
+      .toast {
+        bottom: 12px;
+        right: 12px;
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+      .modal__panel {
+        border-radius: 12px;
+      }
+      .modal__header {
+        padding: 10px 12px;
+      }
+      .modal__body {
+        padding: 12px;
+      }
+      .modal__list li {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -725,4 +825,3 @@
   </script>
 </body>
 </html>
-
