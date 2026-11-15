@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mustafa Volkan VURULKAN - CV</title>
+  <meta name="description" content="Mustafa Volkan Vurulkan's CV: DevOps, Linux, Kubernetes, cloud infrastructure, CI/CD and automation, plus practical technical notes on his blog.">
+  <link rel="canonical" href="https://vurulkan.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -567,7 +569,13 @@
       <div>
         <section>
           <h2>ls /var/links</h2>
-          <div class="command-bar" id="contactLinks"></div>
+          <div class="command-bar" id="contactLinks">
+            <a class="cmd" href="mailto:mustafa@vurulkan.com" target="_blank" rel="noreferrer noopener">Email</a>
+            <a class="cmd" href="https://linkedin.com/in/vurulkan" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+            <a class="cmd" href="https://github.com/vurulkan/" target="_blank" rel="noreferrer noopener">GitHub</a>
+            <a class="cmd" href="https://vurulkan.medium.com/" target="_blank" rel="noreferrer noopener">Medium</a>
+            <a class="cmd" href="https://blog.vurulkan.com/" target="_blank" rel="noreferrer noopener">Blog</a>
+          </div>
         </section>
         <section>
           <h2>experience.log <span class="hint">(click for details)</span></h2>
@@ -727,14 +735,6 @@
       "sudo systemctl status everything"
     ];
 
-    const links = [
-      { label: "Email", href: "mailto:mustafa@vurulkan.com" },
-      { label: "LinkedIn", href: "https://linkedin.com/in/vurulkan" },
-      { label: "GitHub", href: "https://github.com/vurulkan/" },
-      { label: "Medium", href: "https://vurulkan.medium.com/" },
-      { label: "Blog", href: "https://blog.vurulkan.com/" }
-    ];
-
     const typewriterEl = document.getElementById("typewriter");
     let lineIndex = 0;
     let charIndex = 0;
@@ -781,8 +781,6 @@
       const quickTarget = document.getElementById("quickCommands");
       quickTarget.innerHTML = quickCommands.map(cmd => `<button class="cmd" data-cmd="${cmd}">${cmd}</button>`).join("");
 
-      const linksTarget = document.getElementById("contactLinks");
-      linksTarget.innerHTML = links.map(link => `<a class="cmd" href="${link.href}" target="_blank" rel="noreferrer noopener">${link.label}</a>`).join("");
     }
     renderList();
 
